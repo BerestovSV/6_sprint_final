@@ -12,7 +12,7 @@ import (
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../index.html")
+	http.ServeFile(w, r, "../Sprint_6_final/index.html")
 }
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
@@ -57,13 +57,14 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer outputFile.Close()
 
-	_, err = outputFile.WriteString(convertedText)
+	_, err = outputFile.WriteString(inputText + "\n" + convertedText)
 	if err != nil {
 		http.Error(w, "Не удалось записать в файл", http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write([]byte(convertedText))
+	w.Write([]byte(inputText + "<br>" + convertedText))
+
 }
