@@ -16,10 +16,11 @@ func isMorse(s string) bool {
 	}
 	return true
 }
-func isRussianLetter(r rune) bool {
+
+/*func isRussianLetter(r rune) bool {
 	upper := unicode.ToUpper(r)
 	return upper >= 'А' && upper <= 'Я' || upper == 'Ё'
-}
+}*/
 
 func AutoConvert(input string) (string, error) {
 	trimmed := strings.TrimSpace(input)
@@ -32,11 +33,11 @@ func AutoConvert(input string) (string, error) {
 		return morse.ToText(trimmed), nil
 	}
 
-	for _, r := range trimmed {
+	/*for _, r := range trimmed {
 		if unicode.IsLetter(r) && !isRussianLetter(r) {
 			return "", errors.New("обнаружены символы не из русского алфавита")
 		}
-	}
+	}*/
 
 	return morse.ToMorse(trimmed), nil
 }
